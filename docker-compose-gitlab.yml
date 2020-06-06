@@ -1,0 +1,35 @@
+version: "3.7"
+services:
+  gitlab:
+    container_name: "gitlab"
+    image: gitlab/gitlab-ce:latest
+    restart: unless-stopped
+    ports:
+      - "11022:22"
+      - "11080:80"
+      - "11443:443"
+    volumes:
+      - gitlab-config:/etc/gitlab
+      - gitlab-logs:/var/log/gitlab
+      - gitlab-data:/var/opt/gitlab
+    
+
+volumes:
+  gitlab-config:
+    driver: local
+    driver_opts:
+      type: none
+      device: /gitlab/config
+      o: bind
+  gitlab-logs:
+    driver: local
+    driver_opts:
+      type: none
+      device: /gitlab/logs
+      o: bind
+  gitlab-data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /gitlab/data
+      o: bind

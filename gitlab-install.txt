@@ -1,0 +1,19 @@
+#prep
+
+#create gitlab dir in root
+sudo mkdir /gitlab
+
+# change the owner of the created dir (directory created with "sudo" will most likely be owned by root)
+# sudo chown [your-username]:[your-main-groupname] /gitlab/ 
+# ex:
+# sudo chown vagrant:vagrant /gitlab/
+
+mkdir /gitlab/config
+mkdir /gitlab/logs
+mkdir /gitlab/data
+
+#execute in a directory containing docker-compose-gitlab.yml
+docker-compose -f docker-compose-gitlab.yml up -d
+
+#to see the docker container logs you can run:
+docker-compose -f docker-compose-gitlab.yml logs -f -t
